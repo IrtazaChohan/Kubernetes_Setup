@@ -4,8 +4,9 @@
 # Kubelot - Core aspect of Kubernetes which takes care of every container on nodes.
 # Kubectl - Command line tool for interacting with avi_cluster
 
-# First add and install the GPG key fir Kubernetes repository
+# First add and install the GPG key for Kubernetes repository
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
 
 cat << EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
