@@ -18,8 +18,8 @@ sudo apt-get update
 # Now install the packages (installing specific versions - but all have to be the same version) - kubelet, kubeadm and kubectl
 sudo apt-get install -y kubelet=1.12.7-00 kubeadm=1.12.7-00 kubectl=1.12.7-00
 
+# Finally ensure that automatic updates on the packages do not occur
 sudo apt-mark hold kubelet kubeadm kubectl
 
 #Verify Kubeadm is working:
-
 kubeadm version
