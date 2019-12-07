@@ -1,4 +1,5 @@
-# Shows how to install Kubeadm, Kubelet and Kubectl
+# Shows how to install Kubeadm, Kubelet and Kubectl - Install this on all control nodes and master.
+# Once this is complete you need to bootstrap the cluster.
 
 # Kubeadm - This is used for automation for setting up the cluster
 # Kubelot - Core aspect of Kubernetes which takes care of every container on nodes.
