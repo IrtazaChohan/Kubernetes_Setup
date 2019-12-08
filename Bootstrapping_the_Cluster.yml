@@ -1,10 +1,10 @@
 # Bootstrapping the Cluster - after installation of 
 
-# On the Kube master node, initialize the cluster:
+# On the Kube master node, initialize the cluster - we pass a networking flag (may take a few minutes to complete)
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-That command may take a few minutes to complete.
 
-#When it is done, set up the local kubeconfig:
+#When it is done, set up the local kubeconfig - look at the output of the above command and that shows what you need to run
+# Once the below are complete then you should have the Kubernestes master up and running!
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -13,8 +13,9 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl version
 
 #You should get Server Version as well as Client Version. It should look something like this:
-Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.2", GitCommit:"17c77c7898218073f14c8d573582e8d2313dc740", GitTreeState:"clean", BuildDate:"2018-10-24T06:54:59Z", GoVersion:"go1.10.4", Compiler:"gc", Platform:"linux/amd64"}
-Server Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.2", GitCommit:"17c77c7898218073f14c8d573582e8d2313dc740", GitTreeState:"clean", BuildDate:"2018-10-24T06:43:59Z", GoVersion:"go1.10.4", Compiler:"gc", Platform:"linux/amd64"}
+Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.7", GitCommit:"6f482974b76db3f1e0f5d24605a9d1d38fad9a2b", GitTreeState:"clean", BuildDate:"2019-03-25T02:52:13Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.10", GitCommit:"e3c134023df5dea457638b614ee17ef234dc34a6", GitTreeState:"clean", BuildDate:"2019-07-08T03:40:54Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
+
 
 #The kubeadm init command should output a kubeadm join command containing a token and hash. Copy that command and run it with sudo on both worker nodes. It should look something like this:
 sudo kubeadm join $some_ip:6443 --token $some_token --discovery-token-ca-cert-hash $some_hash
