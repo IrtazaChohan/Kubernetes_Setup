@@ -27,10 +27,10 @@ kubeadm join 172.31.114.126:6443 --token txpzuj.pi01ikwoy9q9w0ma --discovery-tok
 #Verify that all nodes have successfully joined the cluster - run the below command on the master node:
 kubectl get nodes
 
-#You should see all three of your nodes listed. It should look something like this:
+# You should see all three of your nodes listed. It should look something like this:
+# The nodes are expected to have a STATUS of NotReady at this point since networking has not been setup yet - thats next.
 NAME                      STATUS     ROLES    AGE     VERSION
-wboyd1c.mylabserver.com   NotReady   master   5m17s   v1.12.2
-wboyd2c.mylabserver.com   NotReady   <none>   53s     v1.12.2
-wboyd3c.mylabserver.com   NotReady   <none>   31s     v1.12.2
+<server1>   NotReady   master   5m17s   v1.12.2
+<server2>   NotReady   <none>   53s     v1.12.2
+<server3>   NotReady   <none>   31s     v1.12.2
 
-#Note: The nodes are expected to have a STATUS of NotReady at this point.
