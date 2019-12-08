@@ -12,13 +12,17 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 #Verify that the cluster is responsive and that Kubectl is working:
 kubectl version
 
-#You should get Server Version as well as Client Version. It should look something like this:
+# You should get Server Version as well as Client Version. Your mainly looking for a server version which proves that you were able to communicate with the API and get a response back using kubectl.
+# Output should look something like this:
 Client Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.7", GitCommit:"6f482974b76db3f1e0f5d24605a9d1d38fad9a2b", GitTreeState:"clean", BuildDate:"2019-03-25T02:52:13Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"12", GitVersion:"v1.12.10", GitCommit:"e3c134023df5dea457638b614ee17ef234dc34a6", GitTreeState:"clean", BuildDate:"2019-07-08T03:40:54Z", GoVersion:"go1.10.8", Compiler:"gc", Platform:"linux/amd64"}
 
-
-#The kubeadm init command should output a kubeadm join command containing a token and hash. Copy that command and run it with sudo on both worker nodes. It should look something like this:
-sudo kubeadm join $some_ip:6443 --token $some_token --discovery-token-ca-cert-hash $some_hash
+# Your now ready to join your worker nodes to the cluster - again you can find this command also from the output of the kubeadm init command we did initially.
+# The kubeadm init command should output a kubeadm join command containing a token and hash. Copy that command and run it with sudo on both worker nodes. 
+# It should look something like this:
+sudo kubeadm join <IP>:6443 --token <token> --discovery-token-ca-cert-hash <Hash>
+#my example:
+kubeadm join 172.31.114.126:6443 --token txpzuj.pi01ikwoy9q9w0ma --discovery-token-ca-cert-hash sha256:4e8a6ab86630ba07023f1d87c55327cde52f126d54631bb51732d742ecde2560
 
 #Verify that all nodes have successfully joined the cluster:
 kubectl get nodes
