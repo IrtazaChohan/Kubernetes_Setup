@@ -1,5 +1,9 @@
 # pods are used to run and manage containers with Kubernetes
 
+# Normally there is one container per pod but you can have more than one container in a pod.
+# pods consists of one or more stroage resources and IP address in the kubernetes cluster. It basically surrounds one or more containers.
+# When your running a container onnodes in the cluster think of it as your runnnig inside a pod.
+
 # Create a simple pod running an nginx container:
 cat << EOF | kubectl create -f -
 apiVersion: v1
