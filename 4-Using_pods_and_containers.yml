@@ -23,6 +23,12 @@ EOF
 # Get a list of pods and verify that your new nginx pod is in the Running state:
 kubectl get pods
 
+# Shuold show something like this:
+kubectl get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          13s
+
+
 # Get more information about your nginx pod:
 kubectl describe pod nginx
 
