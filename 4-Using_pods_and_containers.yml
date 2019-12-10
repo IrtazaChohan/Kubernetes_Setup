@@ -7,7 +7,8 @@
 # When you run a container on a node then kubernetes refers to that as scheduling. So, Kubernetes schedules pods to run on specific servers that are part of the cluster.
 # When Kubernetes schedules a pod to run on a specific node, then that node will actually run the containers that are part of that pod.
 
-# Create a simple pod running an nginx container:
+# Create a simple pod running an nginx container (creating a file for kubectl to run the pod):
+
 cat << EOF | kubectl create -f -
 apiVersion: v1
 kind: Pod
