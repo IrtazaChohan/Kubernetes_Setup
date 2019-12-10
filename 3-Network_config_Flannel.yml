@@ -3,10 +3,11 @@
 # We need to setup a sysctl value on all servers; On all three nodes, run the following - we are basically echoing out what we want (iptables) into sysctl.conf so it is persistant and survives reboots:
 echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
 
-#To ensure the above command execuates immediatly then run the below
+#To ensure the above command execuates immediatly then run the below - make sure you run above and below on all worker nodes.
 sudo sysctl -p
 
 #Install Flannel in the cluster by running this only on the Master node:
+# This will apply (using kubectl apply) the yml file that is located in the below url (provided by coreos that support flannel)
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
 
 #Verify that all the nodes now have a STATUS of Ready:
