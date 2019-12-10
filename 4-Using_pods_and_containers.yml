@@ -38,3 +38,13 @@ kubectl describe pod nginx
 
 # Delete the pod:
 kubectl delete pod nginx
+
+# The servers that run the containers are called nodes - you have control servers that manage and control the cluster and the kubernetes API
+# Usually the control servers are separate from the worker nodes. The worker nodes are responsible for running the workloads
+
+# Get a list of nodes:
+kubectl get nodes
+
+# Get more information about a specific node (enter the node name from the of nodes returned from the above command):
+# This would show the allocated resources (CPU, memory), events
+kubectl describe node $node_name
