@@ -28,8 +28,12 @@ kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          13s
 
+# below will show all pods running on the system - these are backend system pods as they are in the kube-system namespace
+# ever y object in kubernetes is in a namespace, which includes the nginx pod since its in the default namespace
+kubectl get pods -n kube-system
 
 # Get more information about your nginx pod:
+# good troubleshooting command since it shows the node the pod is running on and events related to the system
 kubectl describe pod nginx
 
 # Delete the pod:
