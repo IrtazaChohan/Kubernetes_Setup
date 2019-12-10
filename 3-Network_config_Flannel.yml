@@ -1,7 +1,9 @@
-# Although Kubernetes supports loads of plugins that implements Kubernetes networing in various setups we will use Flannel
+# Although Kubernetes supports loads of plugins that implements Kubernetes networking in various setups we will use Flannel for this task though. We will be installing this on our cluster.
 
 # We need to setup a sysctl value on all servers; On all three nodes, run the following - we are basically echoing out what we want (iptables) into sysctl.conf so it is persistant and survives reboots:
 echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
+
+#To ensure the above command execuates immediatly then run the below
 sudo sysctl -p
 
 #Install Flannel in the cluster by running this only on the Master node:
