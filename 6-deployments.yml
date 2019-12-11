@@ -47,20 +47,18 @@ EOF
 # Get a list of deployments:
 kubectl get deployments
 
-# output shows as:
+# output shows as - you can see you have a desired state of two replicas - There are two replicas currently running because it quickly spun them up.
+# also two of them are available.
 kubectl get deployments
 NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-nginx              2         2         2            2           5h20m
 nginx-deployment   2         2         2            2           16s
-
-
-
-
-
 
 # Get more information about a deployment:
 kubectl describe deployment nginx-deployment
 
-# Get a list of pods:
+# Get a list of pods - You should see two pods created by the deployment.:
 kubectl get pods
-You should see two pods created by the deployment.
+
+# delete a pod - you can delete a pod but due to deployment it will know about this and kick start another one immediatly
+# ie it needs to match the desired state of 2 replicas we defined in the deployment
+kubectl delete pod <name>
