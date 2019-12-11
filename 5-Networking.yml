@@ -1,4 +1,9 @@
-Create a deployment with two nginx pods:
+# Kubernetes works by creating a virtual network across the entire cluster (spans across all nodes).
+# Means that each node has its own unique IP and can communicate across all nodes even if they are on different networks.
+
+# Flannel was used earlier to make the virtual network and allows communication between each node - however there are many other providers that could have been used.
+
+# Create a deployment with two nginx webserver pods:
 cat << EOF | kubectl create -f -
 apiVersion: apps/v1
 kind: Deployment
@@ -22,7 +27,16 @@ spec:
         ports:
         - containerPort: 80
 EOF
-Create a busybox pod to use for testing:
+
+# Check to see they are created:
+kubectl get pods
+#should get back:
+NAME                   READY   STATUS    RESTARTS   AGE
+nginx-d55b94fd-9g22b   1/1     Running   0          10s
+nginx-d55b94fd-kgtpn   1/1     Running   0          10s
+
+
+# Create a busybox pod to use for testing:
 cat << EOF | kubectl create -f -
 apiVersion: v1
 kind: Pod
@@ -36,7 +50,9 @@ spec:
     - sleep
     - "1000"
 EOF
-Get the IP addresses of your pods:
+
+# Get the IP addresses of your pods:
 kubectl get pods -o wide
-Get the IP address of one of the nginx pods, then contact that nginx pod from the busybox pod using the nginx pod's IP address:
+
+# Get the IP address of one of the nginx pods, then contact that nginx pod from the busybox pod using the nginx pod's IP address:
 kubectl exec busybox -- curl $nginx_pod_ip
