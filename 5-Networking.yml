@@ -36,7 +36,7 @@ nginx-d55b94fd-9g22b   1/1     Running   0          10s
 nginx-d55b94fd-kgtpn   1/1     Running   0          10s
 
 
-# Create a busybox pod to use for testing:
+# Create a busybox pod to use for testing - runs an image called busybox and runs curl so we can run curl commands:
 cat << EOF | kubectl create -f -
 apiVersion: v1
 kind: Pod
@@ -51,8 +51,25 @@ spec:
     - "1000"
 EOF
 
-# Get the IP addresses of your pods:
+#Check the pods again:
+kubectl get pods
+NAME                   READY   STATUS    RESTARTS   AGE
+busybox                1/1     Running   0          9s
+nginx-d55b94fd-9g22b   1/1     Running   0          2m31s
+nginx-d55b94fd-kgtpn   1/1     Running   0          2m31s
+
+# Test our network by testing busybox pod to access the nginx pods
+
+# Get the IP addresses of your pods (add -o command for further information):
 kubectl get pods -o wide
+
+#output:
+kubectl get pods -o wide
+NAME                   READY   STATUS    RESTARTS   AGE     IP           NODE      NOMINATED NODE
+busybox                1/1     Running   0          96s     10.244.1.5   server1   <none>
+nginx-d55b94fd-9g22b   1/1     Running   0          3m58s   10.244.2.7   server2   <none>
+nginx-d55b94fd-kgtpn   1/1     Running   0          3m58s   10.244.1.4   server3   <none>
+
 
 # Get the IP address of one of the nginx pods, then contact that nginx pod from the busybox pod using the nginx pod's IP address:
 kubectl exec busybox -- curl $nginx_pod_ip
