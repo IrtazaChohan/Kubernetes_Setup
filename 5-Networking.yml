@@ -74,7 +74,9 @@ nginx-d55b94fd-kgtpn   1/1     Running   0          3m58s   10.244.1.4   server3
 # Get the IP address of one of the nginx pods, then contact that nginx pod from the busybox pod using the nginx pod's IP address:
 kubectl exec busybox -- curl $nginx_pod_ip
 
-# e.g from busybox to nginx output:
+# e.g from busybox to nginx output - this works since we execute curl (exec) from busybox and check to see if we get back the nginx webpage from 10.244.2.7:
+# Note that your getting info from a completly different node from where the busybox is located (see output from above for different nodes hosting pods) - thus networking 
+# across the kubernetes cluster works.
 kubectl exec busybox -- curl 10.244.2.7
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
