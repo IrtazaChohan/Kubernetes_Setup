@@ -54,15 +54,27 @@ kubectl describe node $node_name
 kubectl get pods -n kube-system
 
 # The main components of the cluster are (from the output of the above command):
+# These below four form the Kubernetes control plane - they basically make up the master server.
 
 # etcd - this is the datastore for the kubernetes master and control servers. Has data for all nodes in the cluster, what pods are running.
 #        if you have multiple master nodes then etcd is used to synchonize across the nodes.         
 
 # kube-apiserver - this serves the Kubernetes API which is the primary interface of the cluster. 
-#        This is a REST BASED Web API and kubectl is used to run this command via REST API
+#        This is a REST BASED Web API and kubectl is essentially using REST API to execute commands
 
+# kube-controller-manager - Takes care of backend of Kubernetes. It bundles various components into a single package and does behind the scenes work.
 
+# kube-scheduler - determines when to run pods and which nodes to run pods on.
+
+# The below are part of each node
+
+# kubelet - critical agent on each node. It executes containers on each node. Is the middle man behind the kube API and the container runtime (ie Docker).
+#           When a container needs to be run on a node the control plane reaches out to the Kubelet on that node, and then the Kubelet instructs Docker
+#           to go ahead and run that container. 
+#           Kubelet runs as a service and not a popd, since it is kubelet that runs the pod so it can't run itself!
 
 
 # Check the status of the kubelet service:
 sudo systemctl status kubelet
+
+# kube-proxy - Each node has a kube proxy and this handles the network communication between nodes by adding firewall routing rules.
