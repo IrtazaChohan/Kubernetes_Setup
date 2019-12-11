@@ -1,5 +1,18 @@
 # Deployments are an important tool if you want to take full advantage of the automation capabilities provided by Kubernetes.
 
+# Deployments are a type of object in Kubernetes that give you a little more power to organize and maintain your pods
+# A deployment essentially allows you to specify a desired state, it lets you tell the cluster what you want something
+# to look like, and the cluster constantly works in order to maintain that desired state
+
+# More features of deployments are:
+
+# Scaling - You can specify the number of replicas that you want for a particular application, and the deployment will 
+# create or remove pods in order to meet that number of replicas. So deployments make it really easy to scale up and scale down
+# You just tell the deployment how many replicas you want, and it will not only make sure that you have the right number of replicas.
+# It will also make sure that they are evenly spread out across your multiple nodes for high availability.
+
+# Rolling updates - 
+
 Here are the commands used in this lesson:
 
 Create a deployment:
