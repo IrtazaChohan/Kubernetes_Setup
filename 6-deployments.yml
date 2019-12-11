@@ -15,10 +15,11 @@
 #  gradually replace and remove the old pods in an incremental fashion so that you can roll out your new code gradually without incurring any downtime.
 
 # Self-healing - if one of your pods in the deployment is accidentlly destroyed, the deployment will immeidatly spin up a new one to replace it.
+# It makes sure that you meet the desired state of how many replicas you require even if one is deleted or destroyed.
 
-Here are the commands used in this lesson:
 
-Create a deployment:
+# Create a deployment - This is an nginx-deployment, and there is a specification for the deployment, and we are specifying two replicas. 
+# So we're going to have two nginx pods, and then have a template and the template spec where I specified the containers that are part of this deployment.
 cat <<EOF | kubectl create -f -
 apiVersion: apps/v1
 kind: Deployment
@@ -42,10 +43,13 @@ spec:
         ports:
         - containerPort: 80
 EOF
-Get a list of deployments:
+
+# Get a list of deployments:
 kubectl get deployments
-Get more information about a deployment:
+
+# Get more information about a deployment:
 kubectl describe deployment nginx-deployment
-Get a list of pods:
+
+# Get a list of pods:
 kubectl get pods
 You should see two pods created by the deployment.
