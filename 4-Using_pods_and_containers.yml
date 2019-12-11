@@ -48,3 +48,21 @@ kubectl get nodes
 # Get more information about a specific node (enter the node name from the of nodes returned from the above command):
 # This would show the allocated resources (CPU, memory), events
 kubectl describe node $node_name
+
+
+# Get a list of system pods running in the cluster:
+kubectl get pods -n kube-system
+
+# The main components of the cluster are (from the output of the above command):
+
+# etcd - this is the datastore for the kubernetes master and control servers. Has data for all nodes in the cluster, what pods are running.
+#        if you have multiple master nodes then etcd is used to synchonize across the nodes.         
+
+# kube-apiserver - this serves the Kubernetes API which is the primary interface of the cluster. 
+#        This is a REST BASED Web API and kubectl is used to run this command via REST API
+
+
+
+
+# Check the status of the kubelet service:
+sudo systemctl status kubelet
