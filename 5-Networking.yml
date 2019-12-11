@@ -61,15 +61,46 @@ nginx-d55b94fd-kgtpn   1/1     Running   0          2m31s
 # Test our network by testing busybox pod to access the nginx pods
 
 # Get the IP addresses of your pods (add -o command for further information):
+# This also gives the node that image runs on.
 kubectl get pods -o wide
 
 #output:
 kubectl get pods -o wide
 NAME                   READY   STATUS    RESTARTS   AGE     IP           NODE      NOMINATED NODE
-busybox                1/1     Running   0          96s     10.244.1.5   server1   <none>
-nginx-d55b94fd-9g22b   1/1     Running   0          3m58s   10.244.2.7   server2   <none>
+busybox                1/1     Running   0          96s     10.244.1.5   server2   <none>
+nginx-d55b94fd-9g22b   1/1     Running   0          3m58s   10.244.2.7   server3   <none>
 nginx-d55b94fd-kgtpn   1/1     Running   0          3m58s   10.244.1.4   server3   <none>
-
 
 # Get the IP address of one of the nginx pods, then contact that nginx pod from the busybox pod using the nginx pod's IP address:
 kubectl exec busybox -- curl $nginx_pod_ip
+
+# e.g from busybox to nginx output:
+kubectl exec busybox -- curl 10.244.2.7
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+100   612  100   612    0     0   223k      0 --:--:-- --:--:-- --:--:--  298k
