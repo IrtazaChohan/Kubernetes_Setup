@@ -11,7 +11,10 @@
 # You just tell the deployment how many replicas you want, and it will not only make sure that you have the right number of replicas.
 # It will also make sure that they are evenly spread out across your multiple nodes for high availability.
 
-# Rolling updates - 
+# Rolling updates - With a deployment you can change the deployment container image to a new version of the image. The deployment will 
+#  gradually replace and remove the old pods in an incremental fashion so that you can roll out your new code gradually without incurring any downtime.
+
+# Self-healing - if one of your pods in the deployment is accidentlly destroyed, the deployment will immeidatly spin up a new one to replace it.
 
 Here are the commands used in this lesson:
 
